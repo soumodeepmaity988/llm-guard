@@ -146,6 +146,7 @@ def _get_input_scanner(
         scanner_config["model"] = BAN_COMPETITORS_MODEL
 
     if scanner_name == "Code":
+        CODE_MODEL.kwargs["low_cpu_mem_usage"] = True
         _configure_model(CODE_MODEL, scanner_config)
         scanner_config["model"] = CODE_MODEL
 
@@ -223,6 +224,7 @@ def _get_output_scanner(
         scanner_config["model"] = BIAS_MODEL
 
     if scanner_name == "Code":
+        CODE_MODEL.kwargs["low_cpu_mem_usage"] = True
         _configure_model(CODE_MODEL, scanner_config)
         scanner_config["model"] = CODE_MODEL
 

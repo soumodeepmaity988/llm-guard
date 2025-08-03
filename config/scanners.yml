@@ -12,7 +12,6 @@ input_scanners:
     params:
       threshold: 0.9
       model_max_length: 256
-      low_cpu_mem_usage: true
 
 
 output_scanners:
@@ -20,5 +19,4 @@ output_scanners:
     params:
       threshold: 0.9
       model_max_length: 256
-      low_cpu_mem_usage: true
 
