@@ -12,12 +12,14 @@ input_scanners:
     params:
       threshold: 0.9
       model_max_length: 256
-
+      model_onnx_file_name:  model.onnx
 
 output_scanners:
   - type: Toxicity
     params:
       threshold: 0.9
       model_max_length: 256
+      model_onnx_file_name:  model.onnx
+
 
 

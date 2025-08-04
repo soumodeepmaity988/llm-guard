@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 
 import structlog
 import torch
+import torch._inductor.config
 from opentelemetry import metrics
 
 from llm_guard import input_scanners, output_scanners
@@ -29,6 +30,8 @@ from .config import ScannerConfig
 from .util import get_resource_utilization
 
 torch.set_num_threads(1)
+torch.set_float32_matmul_precision('high')
+torch._inductor.config.fx_graph_cache = True
 
 LOGGER = structlog.getLogger(__name__)
 
@@ -80,7 +83,7 @@ def get_output_scanners(scanners: List[ScannerConfig], vault: Vault) -> List[Out
 def _configure_model(model: Model, scanner_config: Optional[Dict]):
     if scanner_config is None:
         scanner_config = {}
-
+    print("MODEL_SUBFOLDER------------> ", scanner_config)
     if "model_path" in scanner_config and scanner_config["model_path"] is not None:
         model.path = scanner_config["model_path"]
         model.onnx_path = scanner_config["model_path"]
@@ -146,6 +149,7 @@ def _get_input_scanner(
         scanner_config["model"] = BAN_COMPETITORS_MODEL
 
     if scanner_name == "Code":
+        CODE_MODEL.kwargs["low_cpu_mem_usage"] = True
         _configure_model(CODE_MODEL, scanner_config)
         scanner_config["model"] = CODE_MODEL
 
@@ -223,6 +227,7 @@ def _get_output_scanner(
         scanner_config["model"] = BIAS_MODEL
 
     if scanner_name == "Code":
+        CODE_MODEL.kwargs["low_cpu_mem_usage"] = True
         _configure_model(CODE_MODEL, scanner_config)
         scanner_config["model"] = CODE_MODEL
 
