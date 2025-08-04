@@ -5,7 +5,7 @@ app:
 
 auth:
   type: http_bearer
-  token: ${AUTH_TOKEN:e5b469a03dfac1d1796ca14df2fb284af1f1ce1dab5f200fe99571498918caa9}
+  token: e5b469a03dfac1d1796ca14df2fb284af1f1ce1dab5f200fe99571498918caa9
 
 input_scanners:
   - type: Toxicity
@@ -19,4 +19,5 @@ output_scanners:
     params:
       threshold: 0.9
       model_max_length: 256
+
 
