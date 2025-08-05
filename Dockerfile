@@ -15,7 +15,7 @@ WORKDIR /app
 
 # Copy all necessary files into the image
 COPY pyproject.toml ./
-COPY README.md ./          # Make sure this file exists!
+
 COPY app ./app
 
 # Install Python dependencies as root to avoid permission issues
