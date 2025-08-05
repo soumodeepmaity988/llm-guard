@@ -87,6 +87,7 @@ def _configure_model(model: Model, scanner_config: Optional[Dict]):
     if "model_path" in scanner_config and scanner_config["model_path"] is not None:
         model.path = scanner_config["model_path"]
         model.onnx_path = scanner_config["model_path"]
+        model.onnx_filename='model.onnx'
         model.onnx_subfolder = ""
         model.kwargs = {"local_files_only": True}
         scanner_config.pop("model_path")

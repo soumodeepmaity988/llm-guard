@@ -37,6 +37,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 RUN python -m spacy download en_core_web_sm
 
+# Create non-root user AFTER dependencies are installed
+RUN useradd -m -u 1000 user
+
 COPY --chown=user:user ./config/scanners.yml ./config/scanners.yml
 COPY --chown=user:user entrypoint.sh ./entrypoint.sh
 
